@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>emp/list</title>
+<title>사원목록</title>
 <style>
 	#t1{
 		border-collapse: collapse;

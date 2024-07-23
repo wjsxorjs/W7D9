@@ -123,7 +123,7 @@
 // 			$("div").remove(".dialog");
 			
 			for(let i=0; i<data.len; i++){
-				str += "<tr class='opener' style="cursor: pointer;" data-idx='"+d_ar[i].deptno+"'>";
+				str += "<tr class='opener' style='cursor: pointer;' data-idx='"+d_ar[i].deptno+"'>";
 				str +=   "<td>";
 				str +=     d_ar[i].deptno;
 				str +=   "</td>";

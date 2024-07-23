@@ -6,5 +6,4 @@ public interface MyMapper {
 	
 	Object[] search(String type, String value);
 
-
 }

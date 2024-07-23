@@ -41,7 +41,7 @@ public class EmpController {
 		return mv;
 	}
 	
-	@RequestMapping("search")
+	@RequestMapping("emp_search")
 	@ResponseBody
 	public Map<String, Object> search(String searchType, String searchValue) {
 		

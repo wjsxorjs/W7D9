@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>사원목록</title>
+<title>부서목록</title>
 <style>
 	#t1{
 		border-collapse: collapse;
@@ -48,15 +48,14 @@
   </script>
 </head>
 <body>
-	<h1>사원목록</h1>
+	<h1>부서목록</h1>
 	<hr/>
 	<div>
 		<form action="emp/search" method="post">
 			<select name="searchType" id="type">
-				<option value="1">사원번호</option>
-				<option value="2">사원명</option>
-				<option value="3">직종</option>
-				<option value="4">부서명</option>
+				<option value="1">부서번호</option>
+				<option value="2">부서명</option>
+				<option value="3">지역명</option>
 			</select>
 			<input type="text" name="searchValue" id="value" />
 			<button type="button" onclick="sendData(this.form)">검색</button>
@@ -64,33 +63,26 @@
 	</div>
 	<br/>
 		<table id="t1">
-			<caption>사원목록테이블</caption>
+			<caption>부서목록테이블</caption>
 			<thead>
 				<tr>
-					<th>사번</th>
-					<th>사원명</th>
-					<th>직종</th>
+					<th>부서번호</th>
 					<th>부서명</th>
+					<th>지역명</th>
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="evo" items="${e_ar }">
-			<tr class='opener' style="cursor: pointer;" data-idx='${evo.empno }'>
-				<td>${evo.empno }</td>
-				<td>${evo.ename}</td>
-				<td>${evo.job }</td>
-				<td>${evo.dname }</td>
+			<c:forEach var="dvo" items="${d_ar }">
+			<tr class='opener' style="cursor: pointer;" data-idx='${dvo.deptno }'>
+				<td>${dvo.deptno }</td>
+				<td>${dvo.dname }</td>
+				<td>${dvo.city}</td>
 			</tr>
 			
-			<div id='${evo.empno }' class="dialog" title="사원 정보">
-			  <p><strong>사번</strong>: ${evo.empno }<p>
-			  <p><strong>사원명</strong>: ${evo.ename}<p>
-			  <p><strong>직종</strong>: ${evo.job }<p>
-			  <p><strong>입사일</strong>: ${evo.hiredate }<p>
-			  <p><strong>부서명</strong>: ${evo.dname } (부서코드: ${evo.deptno })<p>
-			  <c:if test="${evo.mgr ne null}">
-			  	<p class="manager" style="cursor: pointer;" data-idx="${evo.mgr }" onclick="openDialog(this)"><strong>상사</strong>: ${evo.manager } (사번: ${evo.mgr })<p>
-			  </c:if>
+			<div id='${dvo.deptno }' class="dialog" title="부서 정보">
+			  <p><strong>부서번호</strong>: ${dvo.deptno }<p>
+			  <p><strong>부서명</strong>: ${dvo.dname}<p>
+			  <p><strong>지역명</strong>: ${dvo.city } (지역코드: ${dvo.loc_code })<p>
 			</div>
 			
 			</c:forEach>
@@ -114,7 +106,7 @@
 		// FormData는 파일을 보낼 때만 사용하자!
 		
 		$.ajax({
-			url: "emp_search",
+			url: "dept_search",
 			data: {
 				"searchType" : $("#type").val(),
 				"searchValue" : $("#value").val(),
@@ -124,25 +116,22 @@
 		}).done(function(data){
 			console.log(data);
 			
-			let e_ar = data.e_ar;
+			let d_ar = data.d_ar;
 			let str = "";
 			
 // 			$("div").remove(".ui-dialog");
 // 			$("div").remove(".dialog");
 			
 			for(let i=0; i<data.len; i++){
-				str += "<tr class='opener' style="cursor: pointer;" data-idx='"+e_ar[i].empno+"'>";
+				str += "<tr class='opener' style="cursor: pointer;" data-idx='"+d_ar[i].deptno+"'>";
 				str +=   "<td>";
-				str +=     e_ar[i].empno;
+				str +=     d_ar[i].deptno;
 				str +=   "</td>";
 				str +=   "<td>";
-				str +=     e_ar[i].ename;
+				str +=     d_ar[i].dname;
 				str +=   "</td>";
 				str +=   "<td>";
-				str +=     e_ar[i].job;
-				str +=   "</td>";
-				str +=   "<td>";
-				str +=     e_ar[i].dname;
+				str +=     d_ar[i].city;
 				str +=   "</td>";
 				str += "</tr>";
 								

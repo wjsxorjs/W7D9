@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>emp/list</title>
+<title>사원목록</title>
 <style>
 	#t1{
 		border-collapse: collapse;
@@ -50,7 +50,7 @@
 				<option value="1">사원번호</option>
 				<option value="2">사원명</option>
 				<option value="3">직종</option>
-				<option value="4">부서코드</option>
+				<option value="4">부서명</option>
 			</select>
 			<input type="text" name="searchValue" id="value" />
 			<button type="button" onclick="sendData(this.form)">검색</button>
@@ -64,7 +64,7 @@
 					<th>사번</th>
 					<th>사원명</th>
 					<th>직종</th>
-					<th>부서코드</th>
+					<th>부서명</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -73,14 +73,18 @@
 				<td>${evo.empno }</td>
 				<td>${evo.ename}</td>
 				<td>${evo.job }</td>
-				<td>${evo.deptno }</td>
+				<td>${evo.dname }</td>
 			</tr>
 			
 			<div id='${evo.empno }' class="dialog" title="사원 정보">
 			  <p><strong>사번</strong>: ${evo.empno }<p>
 			  <p><strong>사원명</strong>: ${evo.ename}<p>
 			  <p><strong>직종</strong>: ${evo.job }<p>
-			  <p><strong>부서코드</strong>: ${evo.deptno }<p>
+			  <p><strong>입사일</strong>: ${evo.job }<p>
+			  <p><strong>부서명</strong>: ${evo.dname } (부서코드: ${evo.deptno })<p>
+			  <c:if test="${evo.mgr ne null}">
+			  	<p><strong>상사</strong>: ${evo.manager } (사번: ${evo.mgr })<p>
+			  </c:if>
 			</div>
 			
 			</c:forEach>
@@ -132,7 +136,7 @@
 				str +=     e_ar[i].job;
 				str +=   "</td>";
 				str +=   "<td>";
-				str +=     e_ar[i].deptno;
+				str +=     e_ar[i].dname;
 				str +=   "</td>";
 				str += "</tr>";
 								
